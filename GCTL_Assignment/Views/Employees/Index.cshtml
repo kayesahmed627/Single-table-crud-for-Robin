@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Employee>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3>Employee List</h3>
+        <div class="d-flex justify-content-end mb-1">
+            <a href="@Url.Action("Create", "Employees")" class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i></a>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead class="table-light">
+                <tr>
+                    <th></th>
+                    <th>Employee Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Gender</th>
+                    <th>Join Date</th>
+                    <th>Salary</th>
+                    <th>Job Title</th>
+                    <th>On Available?</th>
+                    <th>...</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var a in Model)
+                {
+                    <tr style="vertical-align:middle">
+
+
+                        <td><img src="~/Pictures/@a.Picture" class="img-thumbnail rounded-circle" style="width:50px" /></td>
+                        <td>@a.EmployeeName</td>
+                        <td>@a.Email</td>
+                        <td>@a.Phone</td>
+                        <td>@a.Gender</td>
+                        <td>@($"{a.JoinDate:yyyy-MM-dd}")</td>
+                        <td>@a.Salary</td>
+                        <td>@a.JobTitle</td>
+                        <td>@(a.OnAvailable ? "Yes" : "No")</td>
+                        <td>
+                            <a asp-action="Edit" asp-controller="Employees" asp-route-id="@a.EmployeeId" class="btn btn-success btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-action="Delete" asp-controller="Employees" asp-route-id="@a.EmployeeId" class="btn btn-danger btn-sm"><i class="bi bi-trash3-fill"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section styles
+{
+    <link href="~/libs/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/libs/jquery/jquery.js"></script>
+}

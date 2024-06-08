@@ -1,0 +1,111 @@
+﻿@model Employee
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="row">
+    <div class="col-6">
+        <h3>Are you sure to delete?</h3>
+        <br />
+        <div class="form-group row mb-1">
+            <label asp-for="EmployeeName" class="col-form-label col-form-label-sm col-2 text-end"></label>
+            <div class="col-6">
+                @Model.EmployeeName
+            </div>
+        </div>
+
+        <div class="form-group row mb-1">
+            <label asp-for="Email" class="col-form-label col-form-label-sm col-2 text-end"></label>
+            <div class="col-6">
+                @Model.Email
+            </div>
+        </div>
+        <div class="form-group row mb-1">
+            <label asp-for="Phone" class="col-form-label col-form-label-sm col-2 text-end"></label>
+            <div class="col-6">
+                @Model.Phone
+            </div>
+        </div>
+        <div class="form-group row mb-1">
+            <label asp-for="Gender" class="col-form-label col-form-label-sm col-2 text-end"></label>
+            <div class="col-6">
+                @Model.Gender
+            </div>
+        </div>
+
+        <div class="form-group row mb-1">
+            <label asp-for="JoinDate" class="col-form-label col-form-label-sm col-2 text-end"></label>
+            <div class="col-6">
+                @Model.JoinDate?.ToString("yyyy-MM-dd")
+            </div>
+        </div>
+        <div class="form-group row mb-1">
+            <label asp-for="Salary" class="col-form-label col-form-label-sm col-2 text-end"></label>
+            <div class="col-6">
+                @Model.Salary
+            </div>
+        </div>
+        <div class="form-group row mb-1">
+            <label asp-for="JobTitle" class="col-form-label col-form-label-sm col-2 text-end"></label>
+            <div class="col-6">
+                @Model.JobTitle
+            </div>
+        </div>
+
+        <div class="form-group row mb-1">
+            <label asp-for="Picture" class="col-form-label col-form-label-sm col-2 text-end"></label>
+            <div class="col-6">
+                @Model.Picture
+            </div>
+        </div>
+
+        <div class="form-group row mb-1">
+            <div class="col-6 offset-1">
+                <div class="form-check">
+                    <input type="checkbox" asp-for="OnAvailable">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Now the employee is available on work.
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row mb-1">
+            <div class="col-4">
+                <form asp-action="Delete" asp-controller="Employees" asp-route-id="@Model.EmployeeId" method="post">
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-danger" name="act" value="insert">Confirm Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class=" col-2">
+        <figure>
+            <img id="img" alt="Employee's picture" class="img-thumbnail figure-img" style="width:250px; margin-top:50px" src="/Pictures/@ViewBag.CurrentPic" />
+            <figcaption class="text-center">Employee's Image</figcaption>
+        </figure>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $("#JoinDate").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        $("#Picture").change(ev => {
+            let file = ev.target.files[0];
+            $("#img").attr("src", URL.createObjectURL(file));
+        })
+        $("#JoinDate").val(formatDate($("#JoinDate").val()));
+        function formatDate(dt) {
+            var d = new Date(dt);
+            return [
+                d.getFullYear(),
+                (d.getMonth() + 1).toString().padStart(2, '0'),
+                d.getDate().toString().padStart(2, '0')
+            ].join('-');
+        }
+    </script>
+}

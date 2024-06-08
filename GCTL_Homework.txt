@@ -1,0 +1,9 @@
+Task:
+
+01. Design and implement signup and login functionality using ASP.NET Core with custom front-end design. 
+02. Login user need additional information Father's name, Date of Birth, full address and blood group.
+03. User profile update.
+04. Utilize either the Database-first or Code-first approach.
+05. Any CSS framework can be used.
+
+Complete within one week.

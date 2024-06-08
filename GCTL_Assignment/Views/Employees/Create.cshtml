@@ -1,0 +1,127 @@
+﻿@model EmployeeInputModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-10">
+        <div class="form-group row mb-1">
+            <h3 class="col-6 text-center">Create new employee</h3>
+        </div>
+        <br />
+        <form asp-action="Create" asp-controller="Employees" method="post" enctype="multipart/form-data">
+
+            <div class="form-group row mb-1">
+                <label asp-for="EmployeeName" class="col-form-label col-form-label-sm col-2 text-end"></label>
+                <div class="col-6">
+                    <input type="text" asp-for="EmployeeName" class="form-control form-control-sm" />
+                    <span asp-validation-for="EmployeeName" class="text-danger" style="font-size:small" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label asp-for="Email" class="col-form-label col-form-label-sm col-2 text-end"></label>
+                <div class="col-6">
+                    <input type="text" asp-for="Email" class="form-control form-control-sm" />
+                    <span asp-validation-for="Email" class="text-danger" style="font-size:small" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label asp-for="Phone" class="col-form-label col-form-label-sm col-2 text-end"></label>
+                <div class="col-6">
+                    <input type="text" asp-for="Phone" class="form-control form-control-sm" />
+                    <span asp-validation-for="Phone" class="text-danger" style="font-size:small" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label asp-for="Gender" class="col-form-label col-form-label-sm col-2 text-end"></label>
+                <div class="col-6">
+                    <select type="text" asp-for="Gender" class="form-select form-select-sm"
+                            asp-items="Html.GetEnumSelectList<Gender>()">
+                        <option value="" selected>Choose one</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger" style="font-size:small" />
+                </div>
+            </div>
+
+            <div class="form-group row mb-1">
+                <label asp-for="JoinDate" class="col-form-label col-form-label-sm col-2 text-end"></label>
+                <div class="col-6">
+                    <input type="text" asp-for="JoinDate" class="form-control form-control-sm" />
+                    <span asp-validation-for="JoinDate" class="text-danger" style="font-size:small" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label asp-for="Salary" class="col-form-label col-form-label-sm col-2 text-end"></label>
+                <div class="col-6">
+                    <input type="text" asp-for="Salary" class="form-control form-control-sm" />
+                    <span asp-validation-for="Salary" class="text-danger" style="font-size:small" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <label asp-for="JobTitle" class="col-form-label col-form-label-sm col-2 text-end"></label>
+                <div class="col-6">
+                    <input type="text" asp-for="JobTitle" class="form-control form-control-sm" />
+                    <span asp-validation-for="JobTitle" class="text-danger" style="font-size:small" />
+                </div>
+            </div>
+
+            <div class="form-group row mb-1">
+                <label asp-for="Picture" class="col-form-label col-form-label-sm col-2 text-end"></label>
+                <div class="col-6">
+                    <input type="file" asp-for="Picture" class="form-control form-control-sm" />
+                    <span asp-validation-for="Picture" class="text-danger" style="font-size:small" />
+                </div>
+            </div>
+            <div class="form-group row mb-1">
+                <div class="col-6 offset-2">
+                    <div class="form-check">
+                        <input type="checkbox" asp-for="OnAvailable">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Ready to work anywhere in country
+                        </label>
+                    </div>
+                    <span asp-validation-for="OnAvailable" class="text-danger" style="font-size:small" />
+                </div>
+            </div>
+
+
+            <div class="form-group row mb-1">
+                <div class="col-8">
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary" name="act" value="insert">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class=" col-2">
+        <figure>
+            <img id="img" alt="Employee's picture" class="img-thumbnail figure-img" style="width:250px; margin-top:50px" src="/Pictures/no-pic.png" />
+            <figcaption class="text-center">Employee's Image</figcaption>
+        </figure>
+    </div>
+</div>
+@section styles
+{
+    <link href="~/libs/datepicker/css/bootstrap-datepicker.standalone.css" rel="stylesheet" />
+    <link href="~/libs/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/libs/jquery/jquery.js"></script>
+    <script src="~/libs/jquery-validate/jquery.validate.js"></script>
+    <script src="~/libs/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/libs/datepicker/js/bootstrap-datepicker.js"></script>
+    <script>
+        $("#JoinDate").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        $("#Picture").change(ev => {
+            let file = ev.target.files[0];
+            $("#img").attr("src", URL.createObjectURL(file));
+        })
+    </script>
+
+}
+
